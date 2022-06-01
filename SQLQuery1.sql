@@ -175,4 +175,61 @@ SELECT
 	WHERE species_name = 'ghost bat'
 ;
 
+
+SELECT * FROM tbl_nutrition
+INNER JOIN tbl_species ON tbl_species.species_nutrition = tbl_nutrition.nutrition_id;
+
+
 /* PART 7 */
+
+DROP TABLE tbl_species, tbl_animalia, tbl_care, tbl_habitat, tbl_nutrition, tbl_order, tbl_specialist;
+
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES tbl_species)
+	DROP TABLE tbl_species, tbl_animala, tbl_care, tbl_class, tbl_habitat, tbl_nutrition, tbl_order, tbl_specialist;
+
+PRINT 'HELLO WORLD'
+
+DECLARE @myVariable INT
+SET @myVariable = 6
+PRINT @myVariable
+
+DECLARE @var1 INT, @var2 INT
+SET @var1 = 3
+SET @var2 = 5
+
+PRINT 'Having fun with' + ' TSQL and MS SQL SERVER'
+
+PRINT 'I have ' + CONVERT(VARCHAR(50), @var1) + ' dollars...'
+
+
+
+/* PART 8 */
+/*DECLARE @var1 INT, @var2 INT*/
+
+SET @var1 = 3
+SET @var2 = 5
+
+PRINT CHAR(9) + 'I have' + CONVERT(VARCHAR(50), @var1) + CHAR(13) +' dollars...'
+
+PRINT 'Variable 1 = ' + CONVERT(VARCHAR(5), @var1) + CHAR(13) + 'Variable 2 = ' + CONVERT(VARCHAR(5), @var2)
+
+PRINT 'Variable 1 = ' + CONVERT(VARCHAR(5), @var1) + CHAR(13) + 'Variable 2 = ' + CONVERT(VARCHAR(5), @var2) + CHAR(13) + 'Total: '
+PRINT @var1 + @var2
+
+IF @var1 <= 3
+	BEGIN
+		PRINT 'Variable 1 <= ' + CONVERT(VARCHAR(5), @var1) + CHAR(13)
+	END
+ELSE
+	BEGIN
+		PRINT 'Variable 1 is not < ' + CONVERT(VARCHAR(5), @var1) + CHAR(13)
+	END
+
+	IF @var1 != 3
+	BEGIN
+		PRINT 'Variable 1 is NOT ' + CONVERT(VARCHAR(5), @var1) + CHAR(13)
+	END
+ELSE
+	BEGIN
+		PRINT 'Variable 1 is not < ' + CONVERT(VARCHAR(5), @var1) + CHAR(13)
+	END
