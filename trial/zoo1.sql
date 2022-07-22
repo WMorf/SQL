@@ -1,12 +1,14 @@
-CREATE DATABASE db_zoo;
+CREATE DATABASE db_zooClean;
 
-USE db_zoo;
+USE db_zooClean;
 
+DROP TABLE tbl_species, tbl_animalia, tbl_care, tbl_habitat, tbl_nutrition, tbl_order, tbl_specialist, tbl_class;
+
+/*CREATION*/
 CREATE TABLE tbl_animalia (
 	animalia_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
 	animalia_type VARCHAR(50) NOT NULL
-	);
-
+);
 
 CREATE TABLE tbl_class (
 	class_id INT PRIMARY KEY NOT NULL IDENTITY (100,1),
@@ -54,17 +56,46 @@ CREATE TABLE tbl_species (
 	species_care VARCHAR(50) NOT NULL CONSTRAINT fk_care_id FOREIGN KEY REFERENCES tbl_care(care_id) ON UPDATE CASCADE ON DELETE CASCADE,
 );
 
-INSERT INTO tbl_species
-	(species_name, species_animalia, species_class, species_order, species_habitat, species_nutrition, species_care)
+/*INSERT*/
+INSERT INTO  tbl_animalia
+	(animalia_type)
 	VALUES
-	('brown bear',1,102,3,5007,2200,'care1'),
-	('jaguar',1,102,1,5007,2200,'care4'),
-	('penguin',1,100,1,5003,2200,'care6'),
-	('ghost bat',1,102,1,5007,2204,'care2'),
-	('chicken',1,100,3,5001,2205,'care0'),
-	('panda',1,102,3,5006,2202,'care4'),
-	('bobcat',1,102,1,5001,2204,'care5'),
-	('grey wolf',1,102,1,5000,2201,'care4')
+	('vertebrate'),
+	('invertebrate')
+;
+
+INSERT INTO tbl_class
+	(class_type)
+	VALUES
+	('birds'),
+	('reptillian'),
+	('mammal'),
+	('anthropod'),
+	('fish'),
+	('worm'),
+	('cnidaria'),
+	('echinoderm')
+;
+
+INSERT INTO  tbl_order
+	(order_type)
+	VALUES
+	('carnivore'),
+	('omnivore'),
+	('herbivore')
+;
+
+INSERT INTO tbl_care
+	(care_id, care_type, care_specialist)
+	VALUES
+	('care0', 'replace the straw', 1),
+	('care1', 'repair broken toys', 4),
+	('care2', 'bottle feed vitamins', 1),
+	('care3', 'human contact_pet subject', 2),
+	('care4', 'clean up animal waste', 1),
+	('care5', 'move subject to excercise pen', 3),
+	('care6', 'drain and refill aquarium', 1),
+	('care7', 'extensive dental work', 3)
 ;
 
 INSERT INTO tbl_nutrition
@@ -103,45 +134,22 @@ INSERT INTO tbl_specialist
 	('Rank','Purple', '555-555-5551')
 ;
 
-INSERT INTO  tbl_animalia
-	(animalia_type)
+INSERT INTO tbl_species
+	(species_name, species_animalia, species_class, species_order, species_habitat, species_nutrition, species_care)
 	VALUES
-	('vertebrate'),
-	('invertebrate')
+	('brown bear',1,102,3,5007,2200,'care1'),
+	('jaguar',1,102,1,5007,2200,'care4'),
+	('penguin',1,100,1,5003,2200,'care6'),
+	('ghost bat',1,102,1,5007,2204,'care2'),
+	('chicken',1,100,3,5001,2205,'care0'),
+	('panda',1,102,3,5006,2202,'care4'),
+	('bobcat',1,102,1,5001,2204,'care5'),
+	('grey wolf',1,102,1,5000,2201,'care4')
 ;
 
-INSERT INTO tbl_class
-	(class_type)
-	VALUES
-	('birds'),
-	('reptillian'),
-	('mammal'),
-	('anthropod'),
-	('fish'),
-	('worm')
-;
+/*SELECT*/
 
-INSERT INTO  tbl_order
-	(order_type)
-	VALUES
-	('carnivore'),
-	('omnivore'),
-	('herbivore')
-;
-
-INSERT INTO tbl_care
-	(care_id, care_type, care_specialist)
-	VALUES
-	('care0', 'replace the straw', 1),
-	('care1', 'repair broken toys', 4),
-	('care2', 'bottle feed vitamins', 1),
-	('care3', 'human contact_pet subject', 2),
-	('care4', 'clean up animal waste', 1),
-	('care5', 'move subject to excercise pen', 3),
-	('care6', 'drain and refill aquarium', 1),
-	('care7', 'extensive dental work', 3)
-;
-
+SELECT * FROM tbl_animalia;
 SELECT * FROM tbl_species;
 SELECT * FROM tbl_nutrition;
 SELECT * FROM tbl_habitat;
@@ -182,7 +190,7 @@ INNER JOIN tbl_species ON tbl_species.species_nutrition = tbl_nutrition.nutritio
 
 /* PART 7 */
 
-DROP TABLE tbl_species, tbl_animalia, tbl_care, tbl_habitat, tbl_nutrition, tbl_order, tbl_specialist;
+DROP TABLE tbl_species, tbl_animalia, tbl_care, tbl_habitat, tbl_nutrition, tbl_order, tbl_specialist, tbl_class;
 
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES tbl_species)
 	DROP TABLE tbl_species, tbl_animala, tbl_care, tbl_class, tbl_habitat, tbl_nutrition, tbl_order, tbl_specialist;
